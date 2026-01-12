@@ -50,7 +50,7 @@ namespace DemoDeploy.Services
                 System.Diagnostics.Debug.WriteLine($"Update check failed: {ex.Message}");
                 // Use mock data for demo if update check fails
                 versionInfo.LatestVersion = new Version(1, 0, 2, 0);
-                versionInfo.ReleaseNotes = "Demo: New features and bug fixes\nï Feature 1: Enhanced UI\nï Feature 2: Performance improvements\nï Bug fixes";
+                versionInfo.ReleaseNotes = "Demo: New features and bug fixes\n‚Ä¢ Feature 1: Enhanced UI\n‚Ä¢ Feature 2: Performance improvements\n‚Ä¢ Bug fixes";
                 versionInfo.DownloadUrl = "https://github.com/yourusername/demodeploy/releases/latest";
                 versionInfo.ReleaseDate = DateTime.Now;
             }
@@ -101,7 +101,7 @@ namespace DemoDeploy.Services
             {
                 CurrentVersion = VersionHelper.GetAppVersion(),
                 LatestVersion = new Version(1, 0, 2, 0),
-                ReleaseNotes = "?? Version 1.0.2 Available!\n\n? New Features:\nï Modern deployment system\nï Auto-update functionality\nï Version tracking\nï MSIX packaging\n\n?? Bug Fixes:\nï Performance improvements\nï UI enhancements\n\n?? Release Date: " + DateTime.Now.ToString("dd/MM/yyyy"),
+                ReleaseNotes = "üì¶ Version 1.0.2 Available!\n\n‚ú® New Features:\n‚Ä¢ Modern deployment system\n‚Ä¢ Auto-update functionality\n‚Ä¢ Version tracking\n‚Ä¢ MSIX packaging\n\nüêõ Bug Fixes:\n‚Ä¢ Performance improvements\n‚Ä¢ UI enhancements\n\nüìÖ Release Date: " + DateTime.Now.ToString("dd/MM/yyyy"),
                 DownloadUrl = "https://github.com/yourusername/demodeploy/releases/latest",
                 ReleaseDate = DateTime.Now
             };

@@ -1,43 +1,43 @@
 # WinUI 3 Deployment Demo
 
-D? �n demo v? **Deployment cho ?ng d?ng WinUI 3** - bao g?m versioning, auto-update, MSIX packaging, v� Microsoft Store deployment.
+Dự án demo về **Deployment cho ứng dụng WinUI 3** - bao gồm versioning, auto-update, MSIX packaging, và Microsoft Store deployment.
 
-## ?? T�nh n?ng
+## 📦 Tính năng
 
-### ? MSIX Packaging
+### ✅ MSIX Packaging
 - Modern Windows app packaging format
-- Automatic installation v� uninstallation
-- Clean removal kh�ng ?? l?i registry/files
+- Automatic installation và uninstallation
+- Clean removal không để lại registry/files
 - Isolated app container
 
-### ? Versioning System
+### ✅ Versioning System
 - Automatic version management
 - Assembly versioning
 - Package versioning (Major.Minor.Build.Revision)
 - Version display trong UI
 
-### ? Auto-Update System
-- Check for updates t? remote server
+### ✅ Auto-Update System
+- Check for updates từ remote server
 - Update notification dialog
 - Release notes display
-- T�ch h?p Windows.Services.Store API
+- Tích hợp Windows.Services.Store API
 - Support AppInstaller protocol
 
-### ? Microsoft Store Ready
+### ✅ Microsoft Store Ready
 - Store-compliant packaging
 - Store submission ready
 - Store listing metadata
 - Store analytics support
 
-### ? Sideloading Support
+### ✅ Sideloading Support
 - Enterprise deployment
 - AppInstaller web deployment
 - Certificate-based signing
 - Group Policy deployment
 
-## ??? C�ng ngh? s? d?ng
+## 🛠️ Công nghệ sử dụng
 
-| C�ng ngh? | Phi�n b?n | M?c ?�ch |
+| Công nghệ | Phiên bản | Mục đích |
 |-----------|-----------|----------|
 | .NET | 8.0 | Runtime framework |
 | WinUI 3 | Windows App SDK 1.8 | UI framework |
@@ -45,78 +45,78 @@ D? �n demo v? **Deployment cho ?ng d?ng WinUI 3** - bao g?m versioning, auto-upd
 | AppInstaller | 2021 schema | Auto-update protocol |
 | Windows.Services.Store | Latest | Store integration |
 
-## ?? C?u tr�c d? �n
+## 📁 Cấu trúc dự án
 
 ```
 DemoDeploy/
-??? Models/
-?   ??? VersionInfo.cs          # Model cho version data
-??? Services/
-?   ??? VersionHelper.cs        # Helper l?y version info
-?   ??? UpdateChecker.cs        # Service check update
-??? Deployment/
-?   ??? DemoDeploy.appinstaller # AppInstaller config
-?   ??? update.json             # Update manifest
-?   ??? Build-MSIX.ps1          # Build script
-?   ??? Create-Certificate.ps1  # Certificate script
-??? Assets/                     # App icons/logos
-??? Package.appxmanifest        # MSIX manifest
-??? MainWindow.xaml             # Main UI
+├── Models/
+│   └── VersionInfo.cs          # Model cho version data
+├── Services/
+│   ├── VersionHelper.cs        # Helper lấy version info
+│   └── UpdateChecker.cs        # Service check update
+├── Deployment/
+│   ├── DemoDeploy.appinstaller # AppInstaller config
+│   ├── update.json             # Update manifest
+│   ├── Build-MSIX.ps1          # Build script
+│   └── Create-Certificate.ps1  # Certificate script
+├── Assets/                     # App icons/logos
+├── Package.appxmanifest        # MSIX manifest
+└── MainWindow.xaml             # Main UI
 ```
 
-## ?? C�ch s? d?ng
+## 🚀 Cách sử dụng
 
-### 1?? Build Project
+### 1️⃣ Build Project
 
-#### S? d?ng Visual Studio:
-1. M? solution trong Visual Studio 2022
-2. Ch?n Configuration: **Release**
-3. Ch?n Platform: **x64**
+#### Sử dụng Visual Studio:
+1. Mở solution trong Visual Studio 2022
+2. Chọn Configuration: **Release**
+3. Chọn Platform: **x64**
 4. Build > Publish > Create App Packages
 
-#### S? d?ng PowerShell Script:
+#### Sử dụng PowerShell Script:
 ```powershell
 cd Deployment
 .\Build-MSIX.ps1 -Configuration Release -Platform x64
 ```
 
-### 2?? T?o Certificate (cho testing)
+### 2️⃣ Tạo Certificate (cho testing)
 
 ```powershell
 cd Deployment
 .\Create-Certificate.ps1
 ```
 
-Sau ?� import certificate v�o **Trusted Root Certification Authorities**:
+Sau đó import certificate vào **Trusted Root Certification Authorities**:
 ```powershell
 certmgr.msc
 ```
 
-### 3?? Sign MSIX Package
+### 3️⃣ Sign MSIX Package
 
 ```powershell
 signtool sign /fd SHA256 /f DemoDeploy_TemporaryKey.pfx /p YOUR_PASSWORD DemoDeploy.msix
 ```
 
-### 4?? Test Installation
+### 4️⃣ Test Installation
 
-Double-click file `.msix` ho?c:
+Double-click file `.msix` hoặc:
 ```powershell
 Add-AppxPackage -Path ".\DemoDeploy.msix"
 ```
 
-## ?? Deployment Options
+## 🌐 Deployment Options
 
 ### Option 1: Microsoft Store
-1. T?o t�i kho?n Partner Center
+1. Tạo tài khoản Partner Center
 2. Reserve app name
 3. Upload MSIX package
 4. Fill store listing (screenshots, description)
 5. Submit for certification
 
-**Chi ph�**: $19 one-time registration fee
+**Chi phí**: $19 one-time registration fee
 
-**L?i �ch**:
+**Lợi ích**:
 - Automatic updates
 - Global distribution
 - Trust badge
@@ -124,27 +124,27 @@ Add-AppxPackage -Path ".\DemoDeploy.msix"
 
 ### Option 2: Sideloading (Enterprise)
 1. Build MSIX package
-2. Sign v?i enterprise certificate
+2. Sign với enterprise certificate
 3. Deploy qua Group Policy/SCCM/Intune
 
-**Y�u c?u**:
+**Yêu cầu**:
 - Enterprise certificate
 - Device management system
 
 ### Option 3: Web Deployment (AppInstaller)
 1. Build MSIX package
-2. T?o `.appinstaller` file
-3. Host tr�n web server (HTTPS required)
+2. Tạo `.appinstaller` file
+3. Host trên web server (HTTPS required)
 4. Users install from URL
 
-**V� d? URL**:
+**Ví dụ URL**:
 ```
 ms-appinstaller:?source=https://yourdomain.com/demodeploy/DemoDeploy.appinstaller
 ```
 
-## ?? Auto-Update Setup
+## 🔄 Auto-Update Setup
 
-### 1. T?o update manifest (`update.json`)
+### 1. Tạo update manifest (`update.json`)
 ```json
 {
   "version": "1.0.2.0",
@@ -154,8 +154,8 @@ ms-appinstaller:?source=https://yourdomain.com/demodeploy/DemoDeploy.appinstalle
 }
 ```
 
-### 2. Host tr�n server
-- GitHub Releases (mi?n ph�)
+### 2. Host trên server
+- GitHub Releases (miễn phí)
 - Azure Blob Storage
 - Custom web server
 
@@ -167,7 +167,7 @@ ms-appinstaller:?source=https://yourdomain.com/demodeploy/DemoDeploy.appinstalle
 </UpdateSettings>
 ```
 
-## ?? Versioning Strategy
+## 🔢 Versioning Strategy
 
 ### Semantic Versioning: `Major.Minor.Build.Revision`
 
@@ -176,27 +176,27 @@ ms-appinstaller:?source=https://yourdomain.com/demodeploy/DemoDeploy.appinstalle
 - **Build**: Bug fixes
 - **Revision**: Hotfixes
 
-### C�ch bump version:
-1. Ch?nh s?a `Package.appxmanifest`:
+### Cách bump version:
+1. Chỉnh sửa `Package.appxmanifest`:
    ```xml
    <Identity Version="1.0.2.0" />
    ```
-2. Build l?i project
+2. Build lại project
 3. Upload update
 
-## ?? Testing Checklist
+## ✅ Testing Checklist
 
-- [ ] App c�i ??t th�nh c�ng
-- [ ] Version hi?n th? ?�ng
-- [ ] Check update ho?t ??ng
-- [ ] Update dialog hi?n th?
-- [ ] App uninstall s?ch s?
+- [ ] App cài đặt thành công
+- [ ] Version hiển thị đúng
+- [ ] Check update hoạt động
+- [ ] Update dialog hiển thị
+- [ ] App uninstall sạch sẽ
 - [ ] Certificate trust
-- [ ] Icon/logo hi?n th? ?�ng
+- [ ] Icon/logo hiển thị đúng
 - [ ] Start menu entry
 - [ ] App lifecycle (suspend/resume)
 
-## ?? Store Submission Checklist
+## 🏪 Store Submission Checklist
 
 - [ ] App name reserved
 - [ ] Age rating completed
@@ -209,51 +209,51 @@ ms-appinstaller:?source=https://yourdomain.com/demodeploy/DemoDeploy.appinstalle
 - [ ] Market availability
 - [ ] Certification notes
 
-## ?? Troubleshooting
+## 🔧 Troubleshooting
 
-### L?i: "Can't install package"
-- Ki?m tra certificate ?� import v�o Trusted Root
-- Verify publisher name trong manifest kh?p v?i certificate
+### Lỗi: "Can't install package"
+- Kiểm tra certificate đã import vào Trusted Root
+- Verify publisher name trong manifest khớp với certificate
 
-### L?i: "Deployment failed"
+### Lỗi: "Deployment failed"
 - Check package dependencies (VCLibs, Windows App Runtime)
 - Verify target Windows version
 
-### Update kh�ng ho?t ??ng
-- Ki?m tra URL trong `.appinstaller` file
+### Update không hoạt động
+- Kiểm tra URL trong `.appinstaller` file
 - Verify HTTPS certificate valid
 - Check version number increment
 
-## ?? T�i li?u tham kh?o
+## 📚 Tài liệu tham khảo
 
 - [MSIX Packaging Documentation](https://docs.microsoft.com/windows/msix/)
 - [Windows App SDK](https://docs.microsoft.com/windows/apps/windows-app-sdk/)
 - [Microsoft Store Submission](https://docs.microsoft.com/windows/apps/publish/)
 - [AppInstaller File Reference](https://docs.microsoft.com/uwp/schemas/appinstallerschema/schema-root)
 
-## ?? Seminar Presentation Tips
+## 🎤 Seminar Presentation Tips
 
-### Slide Structure (15 ph�t)
-1. **Introduction** (2 ph�t)
-   - Gi?i thi?u deployment challenges
-   - T?i sao c?n modern deployment
+### Slide Structure (15 phút)
+1. **Introduction** (2 phút)
+   - Giới thiệu deployment challenges
+   - Tại sao cần modern deployment
 
-2. **MSIX Overview** (3 ph�t)
-   - So s�nh MSIX vs MSI
-   - Benefits c?a MSIX
+2. **MSIX Overview** (3 phút)
+   - So sánh MSIX vs MSI
+   - Benefits của MSIX
 
-3. **Demo Implementation** (5 ph�t)
+3. **Demo Implementation** (5 phút)
    - Live demo: Install
    - Show versioning
    - Check update feature
    - Uninstall
 
-4. **Deployment Options** (3 ph�t)
+4. **Deployment Options** (3 phút)
    - Store deployment
    - Sideloading
    - Web deployment
 
-5. **Q&A** (2 ph�t)
+5. **Q&A** (2 phút)
 
 ### Demo Script
 ```
@@ -265,13 +265,13 @@ ms-appinstaller:?source=https://yourdomain.com/demodeploy/DemoDeploy.appinstalle
 6. Show clean removal
 ```
 
-## ?? Credits
+## 👥 Credits
 
-**Sinh vi�n th?c hi?n**: [T�n c?a b?n]  
-**M�n h?c**: Windows Programming  
-**Gi?ng vi�n h??ng d?n**: [T�n GV]  
-**H?c k?**: 1/2025
+**Sinh viên thực hiện**: [Tên của bạn]  
+**Môn học**: Windows Programming  
+**Giảng viên hướng dẫn**: [Tên GV]  
+**Học kỳ**: 1/2025
 
-## ?? License
+## 📄 License
 
 MIT License - For educational purposes

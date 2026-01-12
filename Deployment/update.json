@@ -1,0 +1,8 @@
+{
+  "version": "1.0.2.0",
+  "releaseNotes": "?? Version 1.0.2 Available!\n\n? New Features:\n• Enhanced deployment system\n• Improved auto-update functionality\n• Better version tracking\n• Optimized MSIX packaging\n\n?? Bug Fixes:\n• Performance improvements\n• UI enhancements\n• Stability improvements",
+  "downloadUrl": "https://github.com/yourusername/demodeploy/releases/latest",
+  "releaseDate": "2025-01-10T00:00:00Z",
+  "minVersion": "1.0.0.0",
+  "updateRequired": false
+}

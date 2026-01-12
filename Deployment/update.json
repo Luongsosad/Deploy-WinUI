@@ -1,8 +1,8 @@
 {
   "version": "1.0.2.0",
-  "releaseNotes": "?? Version 1.0.2 Available!\n\n? New Features:\nï Enhanced deployment system\nï Improved auto-update functionality\nï Better version tracking\nï Optimized MSIX packaging\n\n?? Bug Fixes:\nï Performance improvements\nï UI enhancements\nï Stability improvements",
-  "downloadUrl": "https://github.com/yourusername/demodeploy/releases/latest",
-  "releaseDate": "2025-01-10T00:00:00Z",
+  "releaseNotes": "üì¶ Version 1.0.2 Available!\n\n‚ú® New Features:\n‚Ä¢ Enhanced deployment system\n‚Ä¢ Improved auto-update functionality\n‚Ä¢ Better version tracking\n‚Ä¢ Optimized MSIX packaging\n\nüêõ Bug Fixes:\n‚Ä¢ Performance improvements\n‚Ä¢ UI enhancements\n‚Ä¢ Stability improvements",
+  "downloadUrl": "https://github.com/Luongsosad/Deploy-WinUI/releases/latest",
+  "releaseDate": "2026-01-12T00:00:00Z",
   "minVersion": "1.0.0.0",
   "updateRequired": false
 }

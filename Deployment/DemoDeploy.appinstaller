@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AppInstaller 
     xmlns="http://schemas.microsoft.com/appx/appinstaller/2021"
-    Uri="https://yourdomain.com/demodeploy/DemoDeploy.appinstaller" 
+    Uri="https://luongsosad.github.io/Deploy-WinUI/DemoDeploy.appinstaller" 
     Version="1.0.1.0">
     
     <MainBundle 
         Name="DemoDeploy" 
         Publisher="CN=LUONG" 
         Version="1.0.1.0"
-        Uri="https://yourdomain.com/demodeploy/DemoDeploy_1.0.1.0_x64.msixbundle" />
+        Uri="https://luongsosad.github.io/Deploy-WinUI/DemoDeploy_1.0.1.0_x64.msixbundle" />
 
     <UpdateSettings>
         <OnLaunch 

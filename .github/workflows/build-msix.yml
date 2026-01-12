@@ -1,0 +1,65 @@
+name: Build and Publish MSIX
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    env:
+      Solution_Name: DemoDeploy.sln
+      Project_Path: DemoDeploy.csproj
+      Configuration: Release
+      Platform: x64
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: Restore NuGet packages
+      run: msbuild $env:Project_Path /t:Restore /p:Configuration=$env:Configuration /p:Platform=$env:Platform
+      
+    - name: Build project
+      run: msbuild $env:Project_Path /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:UapAppxPackageBuildMode=StoreUpload /p:AppxBundle=Always /p:GenerateAppxPackageOnBuild=true
+      
+    - name: Upload MSIX artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: MSIX-Package
+        path: |
+          **/*.msix
+          **/*.msixbundle
+          
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          **/*.msix
+          **/*.msixbundle
+        body: |
+          ## ?? Release ${{ github.ref_name }}
+          
+          ### Installation
+          Download the MSIX package and double-click to install.
+          
+          ### Updates
+          This release includes auto-update functionality.
+          
+          ### Requirements
+          - Windows 10 version 1809 or later
+          - .NET 8.0 Runtime
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -13,7 +13,7 @@ namespace DemoDeploy.Services
     public class UpdateChecker
     {
         private readonly HttpClient _httpClient;
-        private const string UPDATE_CHECK_URL = "https://raw.githubusercontent.com/yourusername/demodeploy/main/update.json";
+        private const string UPDATE_CHECK_URL = "https://raw.githubusercontent.com/Luongsosad/Deploy-WinUI/main/Deployment/update.json";
 
         public UpdateChecker()
         {

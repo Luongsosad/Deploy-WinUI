@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="DemoDeploy.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DemoDeploy"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="DemoDeploy - Deployment Demo">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid Padding="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="8" Margin="0,0,0,32">
+            <TextBlock 
+                Text="WinUI 3 Deployment Demo" 
+                Style="{ThemeResource TitleTextBlockStyle}"
+                FontWeight="Bold"/>
+            <TextBlock x:ConnectionId='9' 
+                x:Name="VersionText"
+                Text="Version: Loading..." 
+                Style="{ThemeResource BodyTextBlockStyle}"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+        </StackPanel>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Spacing="16">
+                
+                <!-- Deployment Features Card -->
+                <Expander Header="?? Deployment Features" IsExpanded="True">
+                    <StackPanel Spacing="8" Margin="12">
+                        <CheckBox Content="? MSIX Packaging" IsChecked="True" IsEnabled="False"/>
+                        <CheckBox Content="? Versioning System" IsChecked="True" IsEnabled="False"/>
+                        <CheckBox Content="? Auto-Update Checker" IsChecked="True" IsEnabled="False"/>
+                        <CheckBox Content="? Store Deployment Ready" IsChecked="True" IsEnabled="False"/>
+                        <CheckBox Content="? AppInstaller Support" IsChecked="True" IsEnabled="False"/>
+                        <CheckBox Content="? Sideloading Support" IsChecked="True" IsEnabled="False"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Version Information Card -->
+                <Expander Header="?? Version Information" IsExpanded="True">
+                    <StackPanel Spacing="12" Margin="12">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Current Version:" FontWeight="SemiBold"/>
+                            <TextBlock x:ConnectionId='8' x:Name="CurrentVersionText" Text="1.0.1.0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Package ID:" FontWeight="SemiBold"/>
+                            <TextBlock x:ConnectionId='7' x:Name="PackageIdText" Text="Loading..."/>
+                        </StackPanel>
+                        
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Publisher:" FontWeight="SemiBold"/>
+                            <TextBlock x:ConnectionId='6' x:Name="PublisherText" Text="Loading..."/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Actions Card -->
+                <Expander Header="?? Actions" IsExpanded="True">
+                    <StackPanel Spacing="12" Margin="12">
+                        <Button x:ConnectionId='4' 
+                            x:Name="CheckUpdateButton"
+                            Content="Check for Updates"
+                            Style="{ThemeResource AccentButtonStyle}"
+                            HorizontalAlignment="Stretch"
+                                                           >
+                            <Button.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="U" Modifiers="Control"/>
+                            </Button.KeyboardAccelerators>
+                        </Button>
+                        
+                        <Button x:ConnectionId='5' 
+                            x:Name="ViewInfoButton"
+                            Content="View Deployment Info"
+                            HorizontalAlignment="Stretch"
+                                                        >
+                        </Button>
+                        
+                        <HyperlinkButton 
+                            Content="?? View Documentation"
+                            NavigateUri="https://docs.microsoft.com/windows/apps/package-and-deploy/"
+                            HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Technologies Used -->
+                <Expander Header="??? Technologies Used">
+                    <StackPanel Spacing="8" Margin="12">
+                        <TextBlock Text="� MSIX Packaging Format" TextWrapping="Wrap"/>
+                        <TextBlock Text="� Windows App SDK 1.8" TextWrapping="Wrap"/>
+                        <TextBlock Text="� AppInstaller Protocol" TextWrapping="Wrap"/>
+                        <TextBlock Text="� Windows.Services.Store API" TextWrapping="Wrap"/>
+                        <TextBlock Text="� .NET 8.0" TextWrapping="Wrap"/>
+                        <TextBlock Text="� WinUI 3 Framework" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" Spacing="8" Margin="0,24,0,0">
+            <ProgressBar x:ConnectionId='2' 
+                x:Name="UpdateProgressBar"
+                Visibility="Collapsed"
+                IsIndeterminate="True"/>
+            <TextBlock x:ConnectionId='3' 
+                x:Name="StatusText"
+                Text=""
+                Style="{ThemeResource CaptionTextBlockStyle}"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                HorizontalAlignment="Center"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
+

@@ -104,7 +104,7 @@ jobs:
           $indexPath = "index.html"
           if (Test-Path $indexPath) {
             $content = Get-Content $indexPath -Raw -Encoding UTF8
-            $content = $content -replace 'Version: \d+\.\d+\.\d+(\.\d+)?', "Version: $version"
+            $content = $content -replace 'Version:? \d+\.\d+\.\d+(\.\d+)?', "Version: $version"
             $content = $content -replace 'DemoDeploy_[\d\.]+_x64\.msixbundle', "DemoDeploy_${version}_x64.msixbundle"
             $content | Set-Content $indexPath -Encoding UTF8 -NoNewline
           }

@@ -38,21 +38,26 @@ jobs:
     - name: Build project
       run: msbuild $env:Project_Path /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:UapAppxPackageBuildMode=StoreUpload /p:AppxBundle=Always /p:GenerateAppxPackageOnBuild=true
       
+    - name: List build outputs
+      run: |
+        Write-Host "Searching for MSIX files..." -ForegroundColor Cyan
+        Get-ChildItem -Recurse -Filter "*.msix*" | Select-Object FullName, Length
+      
     - name: Upload MSIX artifacts
       uses: actions/upload-artifact@v4
       with:
         name: MSIX-Package
         path: |
-          **/*.msix
-          **/*.msixbundle
+          AppPackages/**/*.msix
+          AppPackages/**/*.msixbundle
           
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          **/*.msix
-          **/*.msixbundle
+          AppPackages/**/*.msix
+          AppPackages/**/*.msixbundle
         body: |
           ## ?? Release ${{ github.ref_name }}
           

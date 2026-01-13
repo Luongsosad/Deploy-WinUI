@@ -55,11 +55,9 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        files: |
-          AppPackages/**/*.msix
-          AppPackages/**/*.msixbundle
+        files: AppPackages/**/*.msixbundle
         body: |
-          ## ?? Release ${{ github.ref_name }}
+          ## 📦 Release ${{ github.ref_name }}
           
           ### Installation
           Download the MSIX package and double-click to install.
@@ -70,5 +68,56 @@ jobs:
           ### Requirements
           - Windows 10 version 1809 or later
           - .NET 8.0 Runtime
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Deploy to GitHub Pages
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        $version = "${{ github.ref_name }}".Replace("v", "")
+        
+        # Find the msixbundle file
+        $msixFile = Get-ChildItem -Recurse -Filter "*.msixbundle" | Select-Object -First 1
+        
+        if ($msixFile) {
+          Write-Host "Found MSIX: $($msixFile.FullName)" -ForegroundColor Green
+          
+          # Clone gh-pages branch
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git fetch origin gh-pages
+          git checkout gh-pages
+          
+          # Copy MSIX file
+          Copy-Item $msixFile.FullName "DemoDeploy_${version}_x64.msixbundle" -Force
+          
+          # Update index.html version
+          $indexPath = "index.html"
+          if (Test-Path $indexPath) {
+            $content = Get-Content $indexPath -Raw
+            $content = $content -replace 'Version: \d+\.\d+\.\d+\.\d+', "Version: $version"
+            $content = $content -replace 'DemoDeploy_\d+\.\d+\.\d+\.\d+_x64\.msixbundle', "DemoDeploy_${version}_x64.msixbundle"
+            Set-Content $indexPath $content
+          }
+          
+          # Update update.json
+          $updateJsonPath = "update.json"
+          if (Test-Path $updateJsonPath) {
+            $json = Get-Content $updateJsonPath | ConvertFrom-Json
+            $json.version = $version
+            $json.releaseDate = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ")
+            $json | ConvertTo-Json | Set-Content $updateJsonPath
+          }
+          
+          # Commit and push
+          git add .
+          git commit -m "Deploy version $version"
+          git push origin gh-pages
+          
+          Write-Host "✅ Deployed to GitHub Pages!" -ForegroundColor Green
+        } else {
+          Write-Host "❌ No MSIX file found!" -ForegroundColor Red
+          exit 1
+        }
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

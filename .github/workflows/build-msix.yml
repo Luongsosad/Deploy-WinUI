@@ -82,11 +82,15 @@ jobs:
         if ($msixFile) {
           Write-Host "Found MSIX: $($msixFile.FullName)" -ForegroundColor Green
           
-          # Clone gh-pages branch
+          # Clone gh-pages branch  
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git fetch origin gh-pages
           git checkout gh-pages
+          
+          # Clean unnecessary files
+          Get-ChildItem -Directory | Where-Object { $_.Name -in @('bin','obj','AppPackages','BundleArtifacts') } | Remove-Item -Recurse -Force
+          Get-ChildItem -Filter "*.msix" | Where-Object { $_.Name -notlike "*$version*" } | Remove-Item -Force
           
           # Copy MSIX file
           Copy-Item $msixFile.FullName "DemoDeploy_${version}_x64.msixbundle" -Force
@@ -94,24 +98,32 @@ jobs:
           # Update index.html version
           $indexPath = "index.html"
           if (Test-Path $indexPath) {
-            $content = Get-Content $indexPath -Raw
-            $content = $content -replace 'Version: \d+\.\d+\.\d+\.\d+', "Version: $version"
-            $content = $content -replace 'DemoDeploy_\d+\.\d+\.\d+\.\d+_x64\.msixbundle', "DemoDeploy_${version}_x64.msixbundle"
-            Set-Content $indexPath $content
+            $content = Get-Content $indexPath -Raw -Encoding UTF8
+            $content = $content -replace 'Version: \d+\.\d+\.\d+(\.\d+)?', "Version: $version"
+            $content = $content -replace 'DemoDeploy_[\d\.]+_x64\.msixbundle', "DemoDeploy_${version}_x64.msixbundle"
+            $content | Set-Content $indexPath -Encoding UTF8 -NoNewline
           }
           
           # Update update.json
           $updateJsonPath = "update.json"
           if (Test-Path $updateJsonPath) {
-            $json = Get-Content $updateJsonPath | ConvertFrom-Json
+            $json = Get-Content $updateJsonPath -Encoding UTF8 | ConvertFrom-Json
             $json.version = $version
             $json.releaseDate = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ")
-            $json | ConvertTo-Json | Set-Content $updateJsonPath
+            $json | ConvertTo-Json | Set-Content $updateJsonPath -Encoding UTF8
           }
           
-          # Commit and push
-          git add .
-          git commit -m "Deploy version $version"
+          # Update README.md with proper encoding
+          $readmePath = "README.md"
+          if (Test-Path $readmePath) {
+            $readme = Get-Content $readmePath -Raw -Encoding UTF8
+            $readme = $readme -replace 'DemoDeploy_[\d\.]+_x64\.(msix|msixbundle)', "DemoDeploy_${version}_x64.msixbundle"
+            $readme | Set-Content $readmePath -Encoding UTF8 -NoNewline
+          }
+          
+          # Commit and push only deployment files
+          git add index.html update.json README.md "DemoDeploy_${version}_x64.msixbundle"
+          git commit -m "🚀 Deploy version $version"
           git push origin gh-pages
           
           Write-Host "✅ Deployed to GitHub Pages!" -ForegroundColor Green

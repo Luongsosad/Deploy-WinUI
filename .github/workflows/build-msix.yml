@@ -82,6 +82,11 @@ jobs:
         if ($msixFile) {
           Write-Host "Found MSIX: $($msixFile.FullName)" -ForegroundColor Green
           
+          # Copy MSIX to temp location before switching branches
+          $tempMsix = Join-Path $env:TEMP "DemoDeploy_${version}_x64.msixbundle"
+          Copy-Item $msixFile.FullName $tempMsix -Force
+          Write-Host "Copied to temp: $tempMsix" -ForegroundColor Green
+          
           # Clone gh-pages branch  
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
@@ -92,8 +97,8 @@ jobs:
           Get-ChildItem -Directory | Where-Object { $_.Name -in @('bin','obj','AppPackages','BundleArtifacts') } | Remove-Item -Recurse -Force
           Get-ChildItem -Filter "*.msix" | Where-Object { $_.Name -notlike "*$version*" } | Remove-Item -Force
           
-          # Copy MSIX file
-          Copy-Item $msixFile.FullName "DemoDeploy_${version}_x64.msixbundle" -Force
+          # Copy MSIX file from temp
+          Copy-Item $tempMsix "DemoDeploy_${version}_x64.msixbundle" -Force
           
           # Update index.html version
           $indexPath = "index.html"

@@ -8,7 +8,10 @@ Write-Host ""
 
 $certSubject = "CN=LUONG"
 $certName = "DemoDeploy_TestCert"
-$certPassword = Read-Host "Enter certificate password" -AsSecureString
+$password = "DemoPassword123"
+$certPassword = ConvertTo-SecureString -String $password -Force -AsPlainText
+Write-Host "Using password: $password" -ForegroundColor Yellow
+Write-Host ""
 
 Write-Host "Creating self-signed certificate..." -ForegroundColor Yellow
 

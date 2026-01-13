@@ -8,7 +8,7 @@ Write-Host ""
 
 # Step 1: Build the project
 Write-Host "[1/3] Building project..." -ForegroundColor Yellow
-dotnet build ..\DemoDeploy.csproj -c Release /p:Platform=x64 /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true
+dotnet build ..\DemoDeploy.csproj -c Release /p:Platform=x64 /p:AppxPackageSigningEnabled=false
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Build failed!"

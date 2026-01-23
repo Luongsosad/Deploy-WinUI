@@ -2,7 +2,7 @@
   "version": "1.0.6",
   "releaseNotes": "📦 Version 1.0.2 Available!\n\n✨ New Features:\n• Enhanced deployment system\n• Improved auto-update functionality\n• Better version tracking\n• Optimized MSIX packaging\n\n🐛 Bug Fixes:\n• Performance improvements\n• UI enhancements\n• Stability improvements",
   "downloadUrl": "https://github.com/Luongsosad/Deploy-WinUI/releases/latest",
-  "releaseDate": "2026-01-23T16:15:04Z",
+  "releaseDate": "2026-01-23T16:21:24Z",
   "minVersion": "1.0.0.0",
   "updateRequired": false
 }

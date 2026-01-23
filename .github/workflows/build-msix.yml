@@ -119,6 +119,16 @@ jobs:
             $json | ConvertTo-Json | Set-Content $updateJsonPath -Encoding UTF8
           }
           
+          # Update AppInstaller file
+          $appInstallerPath = "DemoDeploy.appinstaller"
+          if (Test-Path $appInstallerPath) {
+            $appInstaller = Get-Content $appInstallerPath -Raw -Encoding UTF8
+            $appInstaller = $appInstaller -replace 'Version="\d+\.\d+\.\d+\.\d+"', "Version=`"$version.0`""
+            $appInstaller = $appInstaller -replace 'DemoDeploy_[\d\.]+_x64\.msixbundle', "DemoDeploy_${version}_x64.msixbundle"
+            $appInstaller | Set-Content $appInstallerPath -Encoding UTF8 -NoNewline
+            Write-Host "✅ Updated AppInstaller to version $version" -ForegroundColor Green
+          }
+          
           # Update README.md with proper encoding
           $readmePath = "README.md"
           if (Test-Path $readmePath) {
@@ -128,7 +138,7 @@ jobs:
           }
           
           # Commit and push only deployment files
-          git add index.html update.json README.md "DemoDeploy_${version}_x64.msixbundle"
+          git add index.html update.json DemoDeploy.appinstaller README.md "DemoDeploy_${version}_x64.msixbundle"
           git commit -m "🚀 Deploy version $version"
           git push origin gh-pages
           

@@ -45,7 +45,21 @@ namespace DemoDeploy
 
             try
             {
-                // Check for real updates from GitHub
+                // Try AppInstaller Store API first (for packaged apps)
+                bool storeUpdateSuccess = await _updateChecker.CheckAndInstallUpdateAsync();
+                
+                if (storeUpdateSuccess)
+                {
+                    UpdateProgressBar.Visibility = Visibility.Collapsed;
+                    StatusText.Text = "Update completed! Restart app to apply.";
+                    await ShowInfoDialog(
+                        "✅ Update Complete",
+                        "The app has been updated successfully. Please restart to use the new version.",
+                        "OK");
+                    return;
+                }
+                
+                // Fallback to JSON API check (for non-Store deployments)
                 var versionInfo = await _updateChecker.CheckForUpdatesAsync();
 
                 UpdateProgressBar.Visibility = Visibility.Collapsed;

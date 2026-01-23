@@ -1,0 +1,58 @@
+name: Update Version Info
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on any version tag like v1.0.4
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/v}"
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+          echo "Version: $TAG"
+      
+      - name: Update update.json
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          
+          cat > Deployment/update.json <<EOF
+          {
+            "Version": "$VERSION.0",
+            "ReleaseNotes": "✨ Version $VERSION Available!\n\n• New features and improvements\n• Performance enhancements\n• Bug fixes and stability improvements\n\nDownload from GitHub Releases to get the latest version.",
+            "DownloadUrl": "https://github.com/${{ github.repository }}/releases/latest",
+            "ReleaseDate": "$(date +%Y-%m-%d)"
+          }
+          EOF
+          
+          echo "✅ Updated update.json with version $VERSION"
+          cat Deployment/update.json
+      
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add Deployment/update.json
+          
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes to commit"
+          else
+            git commit -m "chore: update version info to ${{ steps.get_version.outputs.version }}"
+            git push origin HEAD:main
+            echo "✅ Changes committed and pushed"
+          fi

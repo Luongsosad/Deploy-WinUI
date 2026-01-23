@@ -273,7 +273,7 @@
                                        FontWeight="SemiBold"/>
                             
                             <StackPanel Spacing="6">
-                                <TextBlock Text="• WinUI 3 Framework" FontSize="13"/>
+                                <TextBlock Text="• WinUI 3 Framework -> Version 1.0.5" FontSize="13"/>
                                 <TextBlock Text="• Windows App SDK 1.8" FontSize="13"/>
                                 <TextBlock Text="• .NET 8.0 Runtime" FontSize="13"/>
                                 <TextBlock Text="• MSIX Packaging" FontSize="13"/>

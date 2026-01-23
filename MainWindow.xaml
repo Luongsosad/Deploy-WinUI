@@ -7,124 +7,299 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="DemoDeploy - Deployment Demo">
+    Title="DemoDeploy - Modern Deployment">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid Padding="40">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <StackPanel Grid.Row="0" Spacing="8" Margin="0,0,0,32">
-            <TextBlock 
-                Text="WinUI 3 Deployment Demo" 
-                Style="{ThemeResource TitleTextBlockStyle}"
-                FontWeight="Bold"/>
-            <TextBlock 
-                x:Name="VersionText"
-                Text="Version: Loading..." 
-                Style="{ThemeResource BodyTextBlockStyle}"
-                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
+        <!-- Hero Header -->
+        <Border Grid.Row="0" 
+                Background="{ThemeResource AccentFillColorDefaultBrush}"
+                Padding="48,32">
+            <StackPanel Spacing="12">
+                <TextBlock 
+                    Text="📦 WinUI 3 Deployment" 
+                    Style="{ThemeResource TitleLargeTextBlockStyle}"
+                    FontWeight="Bold"
+                    Foreground="White"/>
+                <StackPanel Orientation="Horizontal" Spacing="16">
+                    <Border Background="#22FFFFFF" 
+                            CornerRadius="12" 
+                            Padding="12,6">
+                        <TextBlock 
+                            x:Name="VersionText"
+                            Text="Version: Loading..." 
+                            FontWeight="SemiBold"
+                            Foreground="White"/>
+                    </Border>
+                    <Border Background="#22FFFFFF" 
+                            CornerRadius="12" 
+                            Padding="12,6">
+                        <TextBlock 
+                            Text="✅ Ready for Production" 
+                            FontWeight="SemiBold"
+                            Foreground="White"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
 
         <!-- Main Content -->
-        <ScrollViewer Grid.Row="1">
-            <StackPanel Spacing="16">
+        <ScrollViewer Grid.Row="1" Padding="32,24,32,24">
+            <Grid RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 
-                <!-- Deployment Features Card -->
-                <Expander Header="?? Deployment Features" IsExpanded="True">
-                    <StackPanel Spacing="8" Margin="12">
-                        <CheckBox Content="?? v1.0.4 MSIX Packaging" IsChecked="True" IsEnabled="False"/>
-                        <CheckBox Content="? Versioning System" IsChecked="True" IsEnabled="False"/>
-                        <CheckBox Content="? Auto-Update Checker" IsChecked="True" IsEnabled="False"/>
-                        <CheckBox Content="? Store Deployment Ready" IsChecked="True" IsEnabled="False"/>
-                        <CheckBox Content="? AppInstaller Support" IsChecked="True" IsEnabled="False"/>
-                        <CheckBox Content="? Sideloading Support" IsChecked="True" IsEnabled="False"/>
-                    </StackPanel>
-                </Expander>
-
-                <!-- Version Information Card -->
-                <Expander Header="?? Version Information" IsExpanded="True">
-                    <StackPanel Spacing="12" Margin="12">
-                        <StackPanel Spacing="4">
-                            <TextBlock Text="Current Version:" FontWeight="SemiBold"/>
-                            <TextBlock x:Name="CurrentVersionText" Text="1.0.1.0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                <!-- Row 1: Version Info and Quick Actions -->
+                <Grid Grid.Row="0" ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Version Information Card -->
+                    <Border Grid.Column="0"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="20">
+                        <Grid RowSpacing="16" ColumnSpacing="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4">
+                                <TextBlock Text="ℹ️ Current Version" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                <TextBlock x:Name="CurrentVersionText" 
+                                           Text="1.0.3.0"
+                                           Style="{ThemeResource TitleTextBlockStyle}"
+                                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                           FontWeight="Bold"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4">
+                                <TextBlock Text="Publisher" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                <TextBlock x:Name="PublisherText" 
+                                           Text="Loading..."
+                                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="4">
+                                <TextBlock Text="Package ID" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                <TextBlock x:Name="PackageIdText" 
+                                           Text="Loading..."
+                                           Style="{ThemeResource CaptionTextBlockStyle}"
+                                           TextWrapping="Wrap"
+                                           FontFamily="Consolas"
+                                           Opacity="0.8"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- Quick Actions Card -->
+                    <Border Grid.Column="1"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="20">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="⚡ Actions" 
+                                       Style="{ThemeResource SubtitleTextBlockStyle}"
+                                       FontWeight="SemiBold"/>
+                            
+                            <Button x:Name="CheckUpdateButton"
+                                    HorizontalAlignment="Stretch"
+                                    Height="50"
+                                    Style="{ThemeResource AccentButtonStyle}"
+                                    Click="CheckUpdateButton_Click">
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                    <FontIcon Glyph="&#xE895;" FontSize="16"/>
+                                    <TextBlock Text="Check Updates" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="U" Modifiers="Control"/>
+                                </Button.KeyboardAccelerators>
+                            </Button>
+                            
+                            <Button x:Name="ViewInfoButton"
+                                    HorizontalAlignment="Stretch"
+                                    Height="44"
+                                    Click="ViewInfoButton_Click">
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                    <FontIcon Glyph="&#xE946;" FontSize="14"/>
+                                    <TextBlock Text="App Info" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            
+                            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                    CornerRadius="4"
+                                    Padding="12,8">
+                                <StackPanel Spacing="4">
+                                    <ProgressBar x:Name="UpdateProgressBar"
+                                                 Visibility="Collapsed"
+                                                 IsIndeterminate="True"/>
+                                    <TextBlock x:Name="StatusText"
+                                               Text="Ready"
+                                               Style="{ThemeResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
                         </StackPanel>
-                        
-                        <StackPanel Spacing="4">
-                            <TextBlock Text="Package ID:" FontWeight="SemiBold"/>
-                            <TextBlock x:Name="PackageIdText" Text="Loading..."/>
+                    </Border>
+                </Grid>
+
+                <!-- Row 2: Features and Technologies - 2 Columns -->
+                <Grid Grid.Row="1" ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Features Card -->
+                    <Border Grid.Column="0"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="20">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="✨ Features" 
+                                       Style="{ThemeResource SubtitleTextBlockStyle}"
+                                       FontWeight="SemiBold"/>
+                            
+                            <Grid RowSpacing="8" ColumnSpacing="8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Border Grid.Row="0" Grid.Column="0"
+                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        CornerRadius="4" Padding="10,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE73E;" FontSize="14" Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                        <TextBlock Text="MSIX" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Border Grid.Row="0" Grid.Column="1"
+                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        CornerRadius="4" Padding="10,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE895;" FontSize="14" Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                        <TextBlock Text="Auto-Update" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Border Grid.Row="1" Grid.Column="0"
+                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        CornerRadius="4" Padding="10,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE8F1;" FontSize="14" Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                        <TextBlock Text="Store Ready" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Border Grid.Row="1" Grid.Column="1"
+                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        CornerRadius="4" Padding="10,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE74C;" FontSize="14" Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                        <TextBlock Text="Versioning" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Border Grid.Row="2" Grid.Column="0"
+                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        CornerRadius="4" Padding="10,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE753;" FontSize="14" Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                        <TextBlock Text="AppInstaller" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Border Grid.Row="2" Grid.Column="1"
+                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        CornerRadius="4" Padding="10,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon Glyph="&#xE8E8;" FontSize="14" Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                        <TextBlock Text="Sideloading" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
                         </StackPanel>
-                        
-                        <StackPanel Spacing="4">
-                            <TextBlock Text="Publisher:" FontWeight="SemiBold"/>
-                            <TextBlock x:Name="PublisherText" Text="Loading..."/>
+                    </Border>
+
+                    <!-- Technologies Card -->
+                    <Border Grid.Column="1"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="20">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="🔧 Technologies" 
+                                       Style="{ThemeResource SubtitleTextBlockStyle}"
+                                       FontWeight="SemiBold"/>
+                            
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="• WinUI 3 Framework" FontSize="13"/>
+                                <TextBlock Text="• Windows App SDK 1.8" FontSize="13"/>
+                                <TextBlock Text="• .NET 8.0 Runtime" FontSize="13"/>
+                                <TextBlock Text="• MSIX Packaging" FontSize="13"/>
+                                <TextBlock Text="• Store API" FontSize="13"/>
+                                <TextBlock Text="• AppInstaller Protocol" FontSize="13"/>
+                            </StackPanel>
+                            
+                            <HyperlinkButton 
+                                Content="📖 Documentation"
+                                NavigateUri="https://docs.microsoft.com/windows/apps/package-and-deploy/"
+                                FontSize="12"
+                                Margin="0,4,0,0"/>
                         </StackPanel>
-                    </StackPanel>
-                </Expander>
+                    </Border>
+                </Grid>
 
-                <!-- Actions Card -->
-                <Expander Header="?? Actions" IsExpanded="True">
-                    <StackPanel Spacing="12" Margin="12">
-                        <Button 
-                            x:Name="CheckUpdateButton"
-                            Content="Check for Updates"
-                            Style="{ThemeResource AccentButtonStyle}"
-                            HorizontalAlignment="Stretch"
-                            Click="CheckUpdateButton_Click">
-                            <Button.KeyboardAccelerators>
-                                <KeyboardAccelerator Key="U" Modifiers="Control"/>
-                            </Button.KeyboardAccelerators>
-                        </Button>
-                        
-                        <Button 
-                            x:Name="ViewInfoButton"
-                            Content="View Deployment Info"
-                            HorizontalAlignment="Stretch"
-                            Click="ViewInfoButton_Click">
-                        </Button>
-                        
-                        <HyperlinkButton 
-                            Content="?? View Documentation"
-                            NavigateUri="https://docs.microsoft.com/windows/apps/package-and-deploy/"
-                            HorizontalAlignment="Stretch"/>
-                    </StackPanel>
-                </Expander>
+                <!-- Row 3: Footer -->
+                <TextBlock Grid.Row="2"
+                    Text="Built with ❤️ using WinUI 3 and Modern Deployment Practices"
+                    Style="{ThemeResource CaptionTextBlockStyle}"
+                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                    HorizontalAlignment="Center"
+                    Margin="0,8,0,0"/>
 
-                <!-- Technologies Used -->
-                <Expander Header="??? Technologies Used">
-                    <StackPanel Spacing="8" Margin="12">
-                        <TextBlock Text="� MSIX Packaging Format" TextWrapping="Wrap"/>
-                        <TextBlock Text="� Windows App SDK 1.8" TextWrapping="Wrap"/>
-                        <TextBlock Text="� AppInstaller Protocol" TextWrapping="Wrap"/>
-                        <TextBlock Text="� Windows.Services.Store API" TextWrapping="Wrap"/>
-                        <TextBlock Text="� .NET 8.0" TextWrapping="Wrap"/>
-                        <TextBlock Text="� WinUI 3 Framework" TextWrapping="Wrap"/>
-                    </StackPanel>
-                </Expander>
-
-            </StackPanel>
+            </Grid>
         </ScrollViewer>
-
-        <!-- Footer -->
-        <StackPanel Grid.Row="2" Spacing="8" Margin="0,24,0,0">
-            <ProgressBar 
-                x:Name="UpdateProgressBar"
-                Visibility="Collapsed"
-                IsIndeterminate="True"/>
-            <TextBlock 
-                x:Name="StatusText"
-                Text=""
-                Style="{ThemeResource CaptionTextBlockStyle}"
-                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                HorizontalAlignment="Center"/>
-        </StackPanel>
 
     </Grid>
 </Window>

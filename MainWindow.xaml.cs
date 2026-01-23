@@ -45,9 +45,8 @@ namespace DemoDeploy
 
             try
             {
-                // For demo purposes, use mock data
-                // In production, this would check a real update server
-                var versionInfo = _updateChecker.GetMockUpdateInfo();
+                // Check for real updates from GitHub
+                var versionInfo = await _updateChecker.CheckForUpdatesAsync();
 
                 UpdateProgressBar.Visibility = Visibility.Collapsed;
 
@@ -84,17 +83,17 @@ namespace DemoDeploy
                        $"Package ID: {VersionHelper.GetPackageId()}\n" +
                        $"Publisher: {VersionHelper.GetPublisher()}\n\n" +
                        $"?? Deployment Features:\n" +
-                       $"• MSIX Packaging - Modern Windows app packaging\n" +
-                       $"• Automatic Versioning - Managed version control\n" +
-                       $"• Auto-Update System - Seamless updates\n" +
-                       $"• Store Ready - Microsoft Store deployment\n" +
-                       $"• Sideloading - Enterprise distribution\n" +
-                       $"• AppInstaller - Web-based installation\n\n" +
+                       $"ï¿½ MSIX Packaging - Modern Windows app packaging\n" +
+                       $"ï¿½ Automatic Versioning - Managed version control\n" +
+                       $"ï¿½ Auto-Update System - Seamless updates\n" +
+                       $"ï¿½ Store Ready - Microsoft Store deployment\n" +
+                       $"ï¿½ Sideloading - Enterprise distribution\n" +
+                       $"ï¿½ AppInstaller - Web-based installation\n\n" +
                        $"??? Technologies:\n" +
-                       $"• WinUI 3 (Windows App SDK 1.8)\n" +
-                       $"• .NET 8.0\n" +
-                       $"• MSIX Packaging\n" +
-                       $"• Windows.Services.Store API\n\n" +
+                       $"ï¿½ WinUI 3 (Windows App SDK 1.8)\n" +
+                       $"ï¿½ .NET 8.0\n" +
+                       $"ï¿½ MSIX Packaging\n" +
+                       $"ï¿½ Windows.Services.Store API\n\n" +
                        $"?? Built: {DateTime.Now:dd/MM/yyyy}";
 
             await ShowInfoDialog("Deployment Information", info, "Close");

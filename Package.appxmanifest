@@ -10,7 +10,7 @@
   <Identity
     Name="179333e3-4b1a-47b5-8c1d-8d26bfcc4a5e"
     Publisher="CN=LUONG"
-    Version="1.0.5.0" />
+    Version="1.0.6.0" />
 
   <mp:PhoneIdentity PhoneProductId="179333e3-4b1a-47b5-8c1d-8d26bfcc4a5e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -40,7 +40,7 @@
                 <!-- Deployment Features Card -->
                 <Expander Header="?? Deployment Features" IsExpanded="True">
                     <StackPanel Spacing="8" Margin="12">
-                        <CheckBox Content="? MSIX Packaging" IsChecked="True" IsEnabled="False"/>
+                        <CheckBox Content="?? v1.0.4 MSIX Packaging" IsChecked="True" IsEnabled="False"/>
                         <CheckBox Content="? Versioning System" IsChecked="True" IsEnabled="False"/>
                         <CheckBox Content="? Auto-Update Checker" IsChecked="True" IsEnabled="False"/>
                         <CheckBox Content="? Store Deployment Ready" IsChecked="True" IsEnabled="False"/>
@@ -100,12 +100,12 @@
                 <!-- Technologies Used -->
                 <Expander Header="??? Technologies Used">
                     <StackPanel Spacing="8" Margin="12">
-                        <TextBlock Text="• MSIX Packaging Format" TextWrapping="Wrap"/>
-                        <TextBlock Text="• Windows App SDK 1.8" TextWrapping="Wrap"/>
-                        <TextBlock Text="• AppInstaller Protocol" TextWrapping="Wrap"/>
-                        <TextBlock Text="• Windows.Services.Store API" TextWrapping="Wrap"/>
-                        <TextBlock Text="• .NET 8.0" TextWrapping="Wrap"/>
-                        <TextBlock Text="• WinUI 3 Framework" TextWrapping="Wrap"/>
+                        <TextBlock Text="ï¿½ MSIX Packaging Format" TextWrapping="Wrap"/>
+                        <TextBlock Text="ï¿½ Windows App SDK 1.8" TextWrapping="Wrap"/>
+                        <TextBlock Text="ï¿½ AppInstaller Protocol" TextWrapping="Wrap"/>
+                        <TextBlock Text="ï¿½ Windows.Services.Store API" TextWrapping="Wrap"/>
+                        <TextBlock Text="ï¿½ .NET 8.0" TextWrapping="Wrap"/>
+                        <TextBlock Text="ï¿½ WinUI 3 Framework" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Expander>
 

@@ -2,13 +2,13 @@
 <AppInstaller 
     xmlns="http://schemas.microsoft.com/appx/appinstaller/2021"
     Uri="https://luongsosad.github.io/Deploy-WinUI/DemoDeploy.appinstaller" 
-    Version="1.0.5.0">
+    Version="1.0.6.0">
     
     <MainBundle 
         Name="DemoDeploy" 
         Publisher="CN=LUONG" 
-        Version="1.0.5.0"
-        Uri="https://luongsosad.github.io/Deploy-WinUI/DemoDeploy_1.0.5_x64.msixbundle" />
+        Version="1.0.6.0"
+        Uri="https://luongsosad.github.io/Deploy-WinUI/DemoDeploy_1.0.6_x64.msixbundle" />
 
     <UpdateSettings>
         <OnLaunch 
@@ -27,14 +27,14 @@
             Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
             ProcessorArchitecture="x64"
             Uri="https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
-            Version="1.0.5.0" />
+            Version="1.0.6.0" />
             
         <Package
             Name="Microsoft.WindowsAppRuntime.1.8"
             Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
             Uri="https://yourdomain.com/demodeploy/Microsoft.WindowsAppRuntime.1.8.msix"
             ProcessorArchitecture="x64"
-            Version="1.0.5.0" />
+            Version="1.0.6.0" />
     </Dependencies>
 
 </AppInstaller>
